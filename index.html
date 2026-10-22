@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | AssetTrack</title>
+  <meta name="description" content="Overview of assets, stock levels and recent movements.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>AssetTrack</strong>
+        <span>Assets &amp; inventory</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html" aria-current="page">Dashboard</a></li>
+          <li><a href="items.html">Items</a></li>
+          <li><a href="catalogue.html">Catalogue Import</a></li>
+          <li><a href="movements.html">Movements</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Acme Operations</span>
+        <span>Alex Morgan · Admin</span>
+      </div>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1>Dashboard</h1>
+        <a class="btn btn-primary" href="items.html?add=1">+ Add Item</a>
+      </header>
+      <main id="main">
+        <div class="section-head">
+          <h2>Inventory overview</h2>
+          <p class="muted">Updated 21 Oct 2026</p>
+        </div>
+
+        <section class="stat-grid" aria-label="Key figures">
+          <article class="card stat-card">
+            <h3>Total Items</h3>
+            <p class="stat-value">75</p>
+            <p class="muted">Units across 8 item records</p>
+          </article>
+          <article class="card stat-card">
+            <h3>Total Stock Value</h3>
+            <p class="stat-value">KES 987,200</p>
+            <p class="muted">At unit cost · includes assigned</p>
+          </article>
+          <article class="card stat-card is-alert">
+            <h3>Low-Stock Items</h3>
+            <p class="stat-value">2</p>
+            <p class="muted">Components and consumables below reorder level</p>
+          </article>
+          <article class="card stat-card">
+            <h3>Assigned Assets</h3>
+            <p class="stat-value">14</p>
+            <p class="muted">Of 44 assets and accessories</p>
+          </article>
+        </section>
+
+        <div class="two-col">
+          <section class="card" aria-labelledby="low-heading">
+            <div class="card-pad"><h2 id="low-heading">Low-Stock Alerts</h2></div>
+            <div class="card-pad alert-list">
+              <article class="alert-item">
+                <div class="alert-item-head">
+                  <h3>Samsung 970 EVO 500GB SSD</h3>
+                  <span class="warn-icon" aria-hidden="true">⚠</span>
+                </div>
+                <span class="badge badge-warning">Low stock · 3 left</span>
+                <p class="muted">Reorder level: 5 units</p>
+                <p class="muted">SSD-001 · Component</p>
+                <button type="button" class="btn btn-secondary">Restock item</button>
+              </article>
+              <article class="alert-item">
+                <div class="alert-item-head">
+                  <h3>HDMI Cable 2m</h3>
+                  <span class="warn-icon" aria-hidden="true">⚠</span>
+                </div>
+                <span class="badge badge-warning">Low stock · 4 left</span>
+                <p class="muted">Reorder level: 10 units</p>
+                <p class="muted">CBL-001 · Consumable</p>
+                <button type="button" class="btn btn-secondary">Restock item</button>
+              </article>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="recent-heading">
+            <div class="card-pad"><h2 id="recent-heading">Recent Movements</h2></div>
+            <div class="table-wrap">
+              <table>
+                <caption class="visually-hidden">Most recent stock and assignment movements</caption>
+                <thead>
+                  <tr><th scope="col">Date</th><th scope="col">Item</th><th scope="col">Action</th><th scope="col">Qty</th><th scope="col">Note</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>20 Oct</td><td><a href="item-detail.html?id=8">HP 207A Toner</a></td><td>Restocked</td><td>+8</td><td class="muted">PO-1109</td></tr>
+                  <tr><td>19 Oct</td><td><a href="item-detail.html?id=7">HDMI Cable 2m</a></td><td>Issued</td><td>−6</td><td class="muted">Meeting rooms</td></tr>
+                  <tr><td>19 Oct</td><td><a href="item-detail.html?id=6">Samsung 970 EVO 500GB SSD</a></td><td>Issued</td><td>−5</td><td class="muted">Workstation builds</td></tr>
+                  <tr><td>18 Oct</td><td><a href="item-detail.html?id=5">Kingston 8GB DDR4 RAM</a></td><td>Issued</td><td>−3</td><td class="muted">Laptop upgrades</td></tr>
+                  <tr><td>17 Oct</td><td><a href="item-detail.html?id=4">HP X1000 Wired Mouse</a></td><td>Assigned</td><td>3</td><td class="muted">Front desk</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <section class="card summary-band" aria-label="Summary">
+          <div><p class="muted">Assets and accessories</p><p class="band-value">44 units · KES 799,500</p></div>
+          <div><p class="muted">Available to assign</p><p class="band-value is-support">30 units</p></div>
+          <div><p class="muted">Components and consumables</p><p class="band-value">31 units · KES 187,700</p></div>
+          <div><p class="muted">Next action</p><p class="band-value">Review 2 low-stock items</p></div>
+        </section>
+      </main>
+      <footer class="page-footer">
+        <span>Acme Operations</span>
+        <time datetime="2026-10-21">21 Oct 2026</time>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

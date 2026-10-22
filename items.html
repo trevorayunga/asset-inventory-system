@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Items | AssetTrack</title>
+  <meta name="description" content="Search, filter and manage assets, accessories, components and consumables.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>AssetTrack</strong>
+        <span>Assets &amp; inventory</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="items.html" aria-current="page">Items</a></li>
+          <li><a href="catalogue.html">Catalogue Import</a></li>
+          <li><a href="movements.html">Movements</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Acme Operations</span>
+        <span>Alex Morgan · Admin</span>
+      </div>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1>Items</h1>
+        <button type="button" class="btn btn-primary">+ Add Item</button>
+      </header>
+      <main id="main">
+        <form class="filters" role="search" aria-label="Search and filter items">
+          <div class="field">
+            <label for="filter-search">Search items</label>
+            <input id="filter-search" type="search" placeholder="Name or SKU" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="filter-category">Category</label>
+            <select id="filter-category">
+              <option value="">All categories</option>
+              <option>Laptop</option><option>Projector</option><option>Monitor</option>
+              <option>Mouse</option><option>Keyboard</option><option>RAM Module</option>
+              <option>Storage Drive</option><option>Cable</option><option>Toner</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-group">Group</label>
+            <select id="filter-group">
+              <option value="">All groups</option>
+              <option value="asset">Asset</option>
+              <option value="accessory">Accessory</option>
+              <option value="component">Component</option>
+              <option value="consumable">Consumable</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-status">Status</label>
+            <select id="filter-status">
+              <option value="">All statuses</option>
+              <option value="available">Available</option>
+              <option value="assigned">Assigned</option>
+              <option value="low">Low stock</option>
+              <option value="maintenance">In maintenance</option>
+              <option value="retired">Retired</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-sort">Sort by</label>
+            <select id="filter-sort">
+              <option value="name-asc">Name A–Z</option>
+              <option value="name-desc">Name Z–A</option>
+              <option value="quantity-asc">Quantity low–high</option>
+              <option value="quantity-desc">Quantity high–low</option>
+              <option value="cost-desc">Unit cost high–low</option>
+            </select>
+          </div>
+        </form>
+
+        <section class="card" aria-labelledby="items-heading">
+          <h2 id="items-heading" class="visually-hidden">Item list</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Name</th><th scope="col">SKU</th><th scope="col">Category</th><th scope="col">Group</th><th scope="col">Quantity</th><th scope="col">Status</th><th scope="col">Actions</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><a href="item-detail.html?id=1">Dell Latitude 5420</a></td><td>LAP-001</td><td>Laptop</td><td>Asset</td><td>6</td><td><span class="badge badge-neutral">2 assigned</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Assign</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=2">Epson EB-X49</a></td><td>PRJ-001</td><td>Projector</td><td>Asset</td><td>3</td><td><span class="badge badge-neutral">1 assigned</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Assign</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=3">Logitech M185 Wireless Mouse</a></td><td>MSE-001</td><td>Mouse</td><td>Accessory</td><td>20</td><td><span class="badge badge-neutral">8 assigned</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Assign</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=4">HP X1000 Wired Mouse</a></td><td>MSE-002</td><td>Mouse</td><td>Accessory</td><td>15</td><td><span class="badge badge-neutral">3 assigned</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Assign</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=5">Kingston 8GB DDR4 RAM</a></td><td>RAM-001</td><td>RAM Module</td><td>Component</td><td>12</td><td><span class="badge badge-success">Available</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Restock</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=6">Samsung 970 EVO 500GB SSD</a></td><td>SSD-001</td><td>Storage Drive</td><td>Component</td><td>3</td><td><span class="badge badge-warning">Low stock</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Restock</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=7">HDMI Cable 2m</a></td><td>CBL-001</td><td>Cable</td><td>Consumable</td><td>4</td><td><span class="badge badge-warning">Low stock</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Restock</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+                <tr><td><a href="item-detail.html?id=8">HP 207A Toner</a></td><td>TON-001</td><td>Toner</td><td>Consumable</td><td>12</td><td><span class="badge badge-success">Available</span></td><td><div class="row-actions"><button type="button" class="link-btn">Edit</button><button type="button" class="link-btn">Restock</button><button type="button" class="link-btn">Delete</button></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <footer class="table-footer">
+            <p class="muted">Showing 1–8 of 8 items · 75 units</p>
+            <nav class="pager" aria-label="Pagination">
+              <button type="button" class="pager-btn" disabled>Previous</button>
+              <button type="button" class="pager-btn is-current" aria-current="page">1</button>
+              <button type="button" class="pager-btn" disabled>Next</button>
+            </nav>
+          </footer>
+        </section>
+      </main>
+      <footer class="page-footer">
+        <span>Acme Operations</span>
+        <time datetime="2026-10-21">21 Oct 2026</time>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
