@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Item detail | AssetTrack</title>
+  <meta name="description" content="Item summary and full movement history.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>AssetTrack</strong>
+        <span>Assets &amp; inventory</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="items.html">Items</a></li>
+          <li><a href="catalogue.html">Catalogue Import</a></li>
+          <li><a href="movements.html">Movements</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Acme Operations</span>
+        <span>Alex Morgan · Admin</span>
+      </div>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1>Item detail</h1>
+        <button type="button" class="btn btn-primary">Record movement</button>
+      </header>
+      <main id="main">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="items.html">← Items</a> <span aria-hidden="true">/</span> <span>Dell Latitude 5420</span>
+        </nav>
+
+        <section class="card card-pad stack" aria-labelledby="item-title">
+          <div class="section-head">
+            <div>
+              <h2 id="item-title" class="title-lg">Dell Latitude 5420</h2>
+              <p class="muted">Asset · Laptop</p>
+            </div>
+            <div class="badge-row">
+              <span class="badge badge-neutral">2 assigned</span>
+              <span class="badge badge-success">4 available</span>
+            </div>
+          </div>
+          <dl class="facts">
+            <div><dt>SKU</dt><dd>LAP-001</dd></div>
+            <div><dt>Quantity</dt><dd>6 total · 4 available</dd></div>
+            <div><dt>Unit cost</dt><dd>KES 95,000</dd></div>
+            <div><dt>Assigned to</dt><dd>2 units assigned · latest: Maya Patel</dd></div>
+          </dl>
+          <div class="section-head">
+            <div class="btn-row">
+              <button type="button" class="btn btn-secondary">Edit</button>
+              <button type="button" class="btn btn-primary">Assign / Return</button>
+              <button type="button" class="btn btn-secondary">Restock / Issue</button>
+              <button type="button" class="btn btn-secondary">Delete</button>
+            </div>
+            <p class="muted">Total value KES 570,000</p>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="history-heading">
+          <div class="card-pad"><h2 id="history-heading">Movement History</h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Date</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Note</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>14 Oct 2026</td><td>Assigned</td><td>2</td><td class="muted">Maya Patel</td></tr>
+                <tr><td>10 Oct 2026</td><td>Received</td><td>+6</td><td class="muted">PO-1101 · Initial stock</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <footer class="table-footer">
+            <p class="muted">2 movements · Complete history</p>
+            <p class="muted">Assignments change availability, not total quantity.</p>
+          </footer>
+        </section>
+      </main>
+      <footer class="page-footer">
+        <span>Acme Operations</span>
+        <time datetime="2026-10-21">21 Oct 2026</time>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
