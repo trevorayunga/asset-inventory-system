@@ -92,3 +92,29 @@ input, select {
 .spinner { width: 20px; height: 20px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
+
+/* Form fields inside dialogs */
+.field-hint { font-size: 0.8125rem; color: var(--muted); }
+.field-error { color: var(--accent-text); font-size: 0.875rem; font-weight: 500; }
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--accent); border-width: 2px; }
+.form-error { margin-bottom: var(--space-2); padding: var(--space-1) var(--space-2); border: 1px solid var(--accent); border-radius: var(--radius); background: #FFF8E5; color: var(--accent-text); }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+.input-prefix { display: flex; align-items: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
+.input-prefix span { padding-left: 12px; color: var(--muted); font-size: 0.875rem; font-weight: 500; }
+.input-prefix input { border: 0; }
+.input-prefix:has(input[aria-invalid="true"]) { border-color: var(--accent); border-width: 2px; }
+
+/* Dialog */
+.modal { width: min(688px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 1px solid var(--border); border-radius: var(--radius); }
+.modal::backdrop { background: rgba(31, 41, 51, 0.55); }
+.modal-header { display: flex; justify-content: space-between; align-items: start; gap: var(--space-2); padding: var(--space-3); border-bottom: 1px solid var(--border); }
+.modal-body { padding: var(--space-3); }
+.modal-footer { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: var(--space-1); margin-top: var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--border); }
+.modal-footer .muted { margin-right: auto; }
+.icon-btn { padding: 4px 8px; background: none; border: 0; color: var(--primary); font-size: 1.75rem; line-height: 1; cursor: pointer; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Toast messages */
+.toast-region { position: fixed; right: var(--space-3); bottom: var(--space-3); z-index: 200; display: grid; gap: var(--space-1); }
+.toast { padding: 12px var(--space-2); background: var(--white); border: 1px solid var(--support); border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
+.toast-error { border-color: var(--accent); color: var(--accent-text); }

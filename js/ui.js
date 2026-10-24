@@ -59,3 +59,15 @@ export function clearState(container) {
   container.innerHTML = '';
   container.hidden = true;
 }
+
+/* ---------- Toast messages ---------- */
+
+export function toast(message, type = 'success') {
+  const region = document.getElementById('toast-region');
+  if (!region) return;
+  const element = document.createElement('div');
+  element.className = `toast toast-${type}`;
+  element.textContent = message;
+  region.append(element);
+  setTimeout(() => element.remove(), 4500);
+}
