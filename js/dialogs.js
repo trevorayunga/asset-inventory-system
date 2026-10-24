@@ -32,7 +32,24 @@ export function openModal({ title, subtitle = '', content, onClose }) {
   dialog.showModal();
   return { dialog, close };
 }
-
+/** Asks "are you sure?" and resolves to true (confirmed) or false (cancelled, Esc or backdrop). */
+export function confirmDialog({ title, message, confirmLabel = 'Confirm' }) {
+  return new Promise((resolve) => {
+    const content = document.createElement('div');
+    content.innerHTML = `<p class="modal-text">${escapeHtml(message)}</p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-cancel autofocus>Cancel</button>
+        <button type="button" class="btn btn-primary" data-confirm>${escapeHtml(confirmLabel)}</button>
+      </div>`;
+    let confirmed = false;
+    const { close } = openModal({ title, content, onClose: () => resolve(confirmed) });
+    content.querySelector('[data-cancel]').addEventListener('click', close);
+    content.querySelector('[data-confirm]').addEventListener('click', () => {
+      confirmed = true;
+      close();
+    });
+  });
+}
 /** Reads every named control's current value. */
 export function readFormValues(form) {
   return Object.fromEntries([...form.querySelectorAll('[name]')].map((control) => [control.name, control.value]));
