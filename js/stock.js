@@ -37,3 +37,35 @@ export function displayStatus(item) {
   }
   return { key: 'available', label: 'Available', variant: 'success' };
 }
+
+/* ---------- Movements (Step 8) ---------- */
+
+/** Button / menu wording for each action. */
+export const ACTION_FORM_LABELS = {
+  assign: 'Assign',
+  return: 'Return',
+  issue: 'Issue',
+  restock: 'Restock',
+  receive: 'Receive',
+};
+
+/** Which actions make sense for an item, decided by its group. */
+export function actionsFor(group) {
+  if (isAssignableGroup(group)) return ['assign', 'return', 'receive'];
+  if (isStockedGroup(group)) return ['issue', 'restock', 'receive'];
+  return [];
+}
+
+/** Returns the fields to PATCH on the item for a movement. Pure: it does not change `item`. */
+export function applyMovement(item, action, quantity) {
+  const qty = Number(quantity);
+  const inStock = Number(item.quantity) || 0;
+  switch (action) {
+    case 'assign': return { assignedQuantity: assignedUnits(item) + qty };
+    case 'return': return { assignedQuantity: assignedUnits(item) - qty };
+    case 'issue': return { quantity: inStock - qty };
+    case 'restock':
+    case 'receive': return { quantity: inStock + qty };
+    default: throw new Error(`Unknown movement action: ${action}`);
+  }
+}
