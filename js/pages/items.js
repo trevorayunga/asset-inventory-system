@@ -4,7 +4,10 @@ import { openItemDialog } from '../itemForm.js';
 import {
   deleteItem, getCategories, getItems,
 } from '../itemService.js';
-import { assignedUnits } from '../stock.js';
+import { openMovementDialog } from '../movementDialog.js';
+import {
+  actionsFor, assignedUnits, isStockedGroup, itemGroup,
+} from '../stock.js';
 import {
   clearState, renderItemRow, showEmpty, showError, showLoading, toast,
 } from '../ui.js';
@@ -62,7 +65,17 @@ function openEdit(item) {
     mode: 'edit', item, categories: state.categories, existingItems: state.items, onSaved: refreshItems,
   });
 }
-
+function openMovement(item) {
+  const group = itemGroup(item);
+  const actions = actionsFor(group);
+  if (actions.length === 0) {
+    toast('This item\'s category has no group, so movements are unavailable.', 'error');
+    return;
+  }
+  openMovementDialog({
+    item, actions, defaultAction: isStockedGroup(group) ? 'restock' : 'assign', onSaved: refreshItems,
+  });
+}
 async function confirmAndDelete(item) {
   const assigned = assignedUnits(item);
   const warning = assigned > 0 ? ` ${assigned} units are currently assigned.` : '';
@@ -92,9 +105,9 @@ $('items-body').addEventListener('click', (event) => {
   if (!item) return;
 
   if (button.dataset.action === 'edit') openEdit(item);
+  else if (button.dataset.action === 'movement') openMovement(item);
   else if (button.dataset.action === 'delete') confirmAndDelete(item);
-  // The "movement" button (Assign / Restock) is wired in Step 8.
-});
+})
 
 loadItems().then(() => {
   // The dashboard's "+ Add Item" link points here with ?add=1.
