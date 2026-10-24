@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
   <script type="module" src="js/pages/items.js"></script>
 </head>
 <body>
@@ -37,7 +38,7 @@
     <div class="content">
       <header class="topbar">
         <h1>Items</h1>
-        <button type="button" class="btn btn-primary">+ Add Item</button>
+        <button type="button" class="btn btn-primary" id="add-item">+ Add Item</button>
       </header>
       <main id="main">
         <form class="filters" role="search" aria-label="Search and filter items">
