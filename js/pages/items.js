@@ -1,6 +1,10 @@
-// Items page: load items (Step 5) and add new ones (Step 6).
+// Items page: load items (Step 5), add (Step 6), edit and delete (Step 7).
+import { confirmDialog } from '../dialogs.js';
 import { openItemDialog } from '../itemForm.js';
-import { getCategories, getItems } from '../itemService.js';
+import {
+  deleteItem, getCategories, getItems,
+} from '../itemService.js';
+import { assignedUnits } from '../stock.js';
 import {
   clearState, renderItemRow, showEmpty, showError, showLoading, toast,
 } from '../ui.js';
@@ -53,7 +57,44 @@ function openAdd() {
   openItemDialog({ categories: state.categories, existingItems: state.items, onSaved: refreshItems });
 }
 
+function openEdit(item) {
+  openItemDialog({
+    mode: 'edit', item, categories: state.categories, existingItems: state.items, onSaved: refreshItems,
+  });
+}
+
+async function confirmAndDelete(item) {
+  const assigned = assignedUnits(item);
+  const warning = assigned > 0 ? ` ${assigned} units are currently assigned.` : '';
+  const confirmed = await confirmDialog({
+    title: 'Delete item',
+    message: `Delete "${item.name}" and its movement history?${warning} This cannot be undone.`,
+    confirmLabel: 'Delete item',
+  });
+  if (!confirmed) return;
+
+  try {
+    await deleteItem(item.id);
+    toast('Item deleted.');
+    await refreshItems();
+  } catch (error) {
+    toast(`Could not delete the item. ${error.message}`, 'error');
+  }
+}
+
 $('add-item').addEventListener('click', openAdd);
+
+// One listener for every row (event delegation): the rows are redrawn after each change.
+$('items-body').addEventListener('click', (event) => {
+  const button = event.target.closest('[data-action]');
+  if (!button) return;
+  const item = state.items.find((entry) => String(entry.id) === button.dataset.id);
+  if (!item) return;
+
+  if (button.dataset.action === 'edit') openEdit(item);
+  else if (button.dataset.action === 'delete') confirmAndDelete(item);
+  // The "movement" button (Assign / Restock) is wired in Step 8.
+});
 
 loadItems().then(() => {
   // The dashboard's "+ Add Item" link points here with ?add=1.
