@@ -1,5 +1,7 @@
 // Pure input validation. Each function returns { valid, errors }; errors maps field name -> message.
-import { isAssignableGroup } from './stock.js';
+import {
+  actionsFor, assignedUnits, availableUnits, isAssignableGroup, itemGroup,
+} from './stock.js';
 
 export const ITEM_STATUSES = ['active', 'maintenance', 'retired'];
 
@@ -55,6 +57,34 @@ export function validateItem(values, {
   }
 
   if (!ITEM_STATUSES.includes(values.status)) errors.status = 'Choose a valid status.';
+
+  return { valid: Object.keys(errors).length === 0, errors };
+}
+
+
+/** Checks a stock or assignment movement against the item's current numbers. */
+export function validateMovement(item, { action, quantity, person = '' }) {
+  const errors = {};
+  const qty = Number(quantity);
+
+  if (!actionsFor(itemGroup(item)).includes(action)) {
+    errors.action = 'This action is not available for this item.';
+  } else if ((action === 'assign' || action === 'issue') && item.status !== 'active') {
+    const state = item.status === 'maintenance' ? 'in maintenance' : 'retired';
+    errors.action = `Items that are ${state} can't be ${action === 'assign' ? 'assigned' : 'issued'}.`;
+  }
+
+  if (!isWholeNumber(quantity) || qty < 1) {
+    errors.quantity = 'Enter a whole number of 1 or more.';
+  } else if (action === 'assign' && qty > availableUnits(item)) {
+    errors.quantity = `Only ${availableUnits(item)} available to assign.`;
+  } else if (action === 'return' && qty > assignedUnits(item)) {
+    errors.quantity = `Only ${assignedUnits(item)} currently assigned.`;
+  } else if (action === 'issue' && qty > Number(item.quantity)) {
+    errors.quantity = `Only ${item.quantity} in stock.`;
+  }
+
+  if (action === 'assign' && isBlank(person)) errors.person = 'Enter who the item is assigned to.';
 
   return { valid: Object.keys(errors).length === 0, errors };
 }
