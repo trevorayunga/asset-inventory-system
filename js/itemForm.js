@@ -1,8 +1,8 @@
-// "Add item" dialog (Step 6). Step 7 adds an edit mode to the same dialog.
+// Add / edit item dialog. Step 6 added "add"; Step 7 adds "edit" using the same form.
 import { openModal, readFormValues, setFormError, setSaving, showFieldErrors } from './dialogs.js';
-import { createItem } from './itemService.js';
+import { createItem, toItemPayload, updateItem } from './itemService.js';
 import { createMovement } from './movementService.js';
-import { GROUP_LABELS } from './stock.js';
+import { GROUP_LABELS, assignedUnits } from './stock.js';
 import { escapeHtml, toast } from './ui.js';
 import { validateItem } from './validators.js';
 
@@ -21,13 +21,14 @@ function field(name, label, control, hint = '') {
   </div>`;
 }
 
-function buildFormHtml(categories) {
+function buildFormHtml(categories, isEdit) {
   const describedBy = (name, hint) => `aria-describedby="${hint ? `hint-${name} ` : ''}err-${name}"`;
   const input = (name, type, extra = '', hint = false) => `<input id="f-${name}" name="${name}" type="${type}" aria-required="true" ${describedBy(name, hint)} ${extra}>`;
   const categoryOptions = categories
     .map((category) => `<option value="${escapeHtml(category.id)}">${escapeHtml(category.name)} · ${escapeHtml(GROUP_LABELS[category.group] ?? '')}</option>`)
     .join('');
   const statusOptions = STATUS_OPTIONS.map(([value, label]) => `<option value="${value}">${label}</option>`).join('');
+  const quantityHint = isEdit ? 'Correcting the count here adds no history entry.' : '';
 
   return `
   <p class="form-error" data-form-error role="alert" hidden></p>
@@ -36,7 +37,7 @@ function buildFormHtml(categories) {
     ${field('sku', 'SKU', input('sku', 'text', 'placeholder="e.g. LAP-002" autocomplete="off"'))}
     ${field('categoryId', 'Category', `<select id="f-categoryId" name="categoryId" aria-required="true" ${describedBy('categoryId')}><option value="">Select a category</option>${categoryOptions}</select>`)}
     ${field('status', 'Status', `<select id="f-status" name="status" aria-required="true" ${describedBy('status')}>${statusOptions}</select>`)}
-    ${field('quantity', 'Quantity', input('quantity', 'number', 'min="0" step="1" inputmode="numeric"'))}
+    ${field('quantity', 'Quantity', input('quantity', 'number', 'min="0" step="1" inputmode="numeric"', Boolean(quantityHint)), quantityHint)}
     ${field('reorderLevel', 'Reorder level', input('reorderLevel', 'number', 'min="0" step="1" inputmode="numeric"', true), 'Used for low-stock alerts on components and consumables.')}
     ${field('unitCost', 'Unit cost', `<div class="input-prefix"><span aria-hidden="true">KES</span>${input('unitCost', 'number', 'min="0" step="1" inputmode="decimal"')}</div>`)}
   </div>
@@ -60,12 +61,29 @@ function normalise(values) {
   };
 }
 
-export function openItemDialog({ categories, existingItems = [], onSaved }) {
+/**
+ * mode 'add' (default): creates an item.
+ * mode 'edit': pass the existing `item`; the form is pre-filled and saved with PUT.
+ */
+export function openItemDialog({
+  mode = 'add', item = null, categories, existingItems = [], onSaved,
+}) {
+  const isEdit = mode === 'edit';
   const form = document.createElement('form');
   form.noValidate = true; // we show our own messages instead of the browser's
-  form.innerHTML = buildFormHtml(categories);
+  form.innerHTML = buildFormHtml(categories, isEdit);
 
-  const { close } = openModal({ title: 'Add item', content: form });
+  if (isEdit) {
+    ['name', 'sku', 'categoryId', 'status', 'quantity', 'reorderLevel', 'unitCost'].forEach((name) => {
+      form.querySelector(`[name="${name}"]`).value = item[name];
+    });
+  }
+
+  const { close } = openModal({
+    title: isEdit ? 'Edit item' : 'Add item',
+    subtitle: isEdit ? `${item.name} · ${item.sku}` : '',
+    content: form,
+  });
   form.querySelector('[data-cancel]').addEventListener('click', close);
 
   // Clear a field's message as soon as the user edits it.
@@ -80,7 +98,12 @@ export function openItemDialog({ categories, existingItems = [], onSaved }) {
     event.preventDefault();
     setFormError(form, '');
     const raw = readFormValues(form);
-    const { valid, errors } = validateItem(raw, { existingItems });
+    const { valid, errors } = validateItem(raw, {
+      existingItems,
+      editingId: isEdit ? item.id : null,
+      assignedQuantity: isEdit ? assignedUnits(item) : 0,
+      categories,
+    });
     showFieldErrors(form, errors);
     if (!valid) {
       form.querySelector('[aria-invalid="true"]').focus();
@@ -89,6 +112,22 @@ export function openItemDialog({ categories, existingItems = [], onSaved }) {
 
     const values = normalise(raw);
     setSaving(form, true);
+
+    if (isEdit) {
+      try {
+        // PUT replaces the whole record, so keep the stored fields (such as assignedQuantity).
+        await updateItem(item.id, { ...toItemPayload(item), ...values });
+      } catch (error) {
+        setFormError(form, `Could not save the item. ${error.message}`);
+        setSaving(form, false);
+        return;
+      }
+      toast('Item updated successfully.');
+      close();
+      onSaved?.();
+      return;
+    }
+
     let created;
     try {
       created = await createItem(values);
