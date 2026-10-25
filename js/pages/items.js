@@ -10,7 +10,7 @@ import {
   actionsFor, assignedUnits, isStockedGroup, itemGroup,
 } from '../stock.js';
 import {
-  clearState, debounce, fillSelect, renderItemRow, renderPager, showEmpty, showError, showLoading, toast,
+  clearState, debounce, fillSelect, initPage, renderItemRow, renderPager, showEmpty, showError, showLoading, toast,
 } from '../ui.js';
 
 const $ = (id) => document.getElementById(id);
@@ -155,6 +155,8 @@ $('items-body').addEventListener('click', (event) => {
   else if (button.dataset.action === 'movement') openMovement(item);
   else if (button.dataset.action === 'delete') confirmAndDelete(item);
 });
+
+initPage();
 
 loadItems().then(() => {
   // The dashboard's "+ Add Item" link points here with ?add=1.

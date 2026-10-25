@@ -38,7 +38,7 @@
         <h1>Movements</h1>
       </header>
       <main id="main">
-        <form class="filters filters-movements" role="search" aria-label="Filter movements">
+        <form class="filters filters-movements" id="filters" role="search" aria-label="Filter movements">
           <div class="field">
             <label for="filter-search">Search movements</label>
             <input id="filter-search" type="search" placeholder="Item, person or note" autocomplete="off">
@@ -67,41 +67,32 @@
           </div>
         </form>
 
-        <section class="card" aria-labelledby="movements-heading">
+        <section aria-labelledby="movements-heading">
           <h2 id="movements-heading" class="visually-hidden">Movement list</h2>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th scope="col">Date</th><th scope="col">Item</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Person / Note</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>20 Oct 2026</td><td><a href="item-detail.html?id=8">HP 207A Toner</a></td><td>Restocked</td><td>+8</td><td class="muted">PO-1109</td></tr>
-                <tr><td>19 Oct 2026</td><td><a href="item-detail.html?id=7">HDMI Cable 2m</a></td><td>Issued</td><td>−6</td><td class="muted">Meeting rooms</td></tr>
-                <tr><td>19 Oct 2026</td><td><a href="item-detail.html?id=6">Samsung 970 EVO 500GB SSD</a></td><td>Issued</td><td>−5</td><td class="muted">Workstation builds</td></tr>
-                <tr><td>18 Oct 2026</td><td><a href="item-detail.html?id=5">Kingston 8GB DDR4 RAM</a></td><td>Issued</td><td>−3</td><td class="muted">Laptop upgrades</td></tr>
-                <tr><td>17 Oct 2026</td><td><a href="item-detail.html?id=4">HP X1000 Wired Mouse</a></td><td>Assigned</td><td>3</td><td class="muted">Front desk</td></tr>
-                <tr><td>16 Oct 2026</td><td><a href="item-detail.html?id=3">Logitech M185 Wireless Mouse</a></td><td>Assigned</td><td>8</td><td class="muted">Sales team</td></tr>
-                <tr><td>15 Oct 2026</td><td><a href="item-detail.html?id=2">Epson EB-X49</a></td><td>Assigned</td><td>1</td><td class="muted">Training room</td></tr>
-                <tr><td>14 Oct 2026</td><td><a href="item-detail.html?id=1">Dell Latitude 5420</a></td><td>Assigned</td><td>2</td><td class="muted">Maya Patel</td></tr>
-              </tbody>
-            </table>
+          <div id="movements-state" aria-live="polite"></div>
+          <div class="card" id="movements-card" hidden>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">Date</th><th scope="col">Item</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Person / Note</th></tr>
+                </thead>
+                <tbody id="movements-body"></tbody>
+              </table>
+            </div>
+            <footer class="table-footer">
+              <p class="muted" id="movements-count" aria-live="polite"></p>
+              <nav class="pager" id="movements-pager" aria-label="Pagination"></nav>
+            </footer>
           </div>
-          <footer class="table-footer">
-            <p class="muted">Showing 1–8 of 16 movements</p>
-            <nav class="pager" aria-label="Pagination">
-              <button type="button" class="pager-btn" disabled>Previous</button>
-              <button type="button" class="pager-btn is-current" aria-current="page">1</button>
-              <button type="button" class="pager-btn">2</button>
-              <button type="button" class="pager-btn">Next</button>
-            </nav>
-          </footer>
         </section>
       </main>
       <footer class="page-footer">
         <span>Acme Operations</span>
-        <time datetime="2026-10-21">21 Oct 2026</time>
+        <time id="today"></time>
       </footer>
     </div>
   </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/pages/movements.js"></script>
 </body>
 </html>
