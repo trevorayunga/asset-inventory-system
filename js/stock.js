@@ -69,3 +69,15 @@ export function applyMovement(item, action, quantity) {
     default: throw new Error(`Unknown movement action: ${action}`);
   }
 }
+
+/** Used by the status filter on the Items page. '' means "all statuses". */
+export function matchesStatus(item, filter) {
+  switch (filter) {
+    case 'assigned': return isAssignableGroup(itemGroup(item)) && assignedUnits(item) > 0;
+    case 'low': return isLowStock(item);
+    case 'maintenance': return item.status === 'maintenance';
+    case 'retired': return item.status === 'retired';
+    case 'available': return item.status === 'active' && !isLowStock(item) && availableUnits(item) > 0;
+    default: return true;
+  }
+}

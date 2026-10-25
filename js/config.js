@@ -8,3 +8,7 @@ export const CATALOGUE_BASE_URL = 'https://dummyjson.com';
 // DummyJSON prices are in US dollars. Prices in AssetTrack are in Kenya Shillings (KES).
 // Check the current rate before you present the project.
 export const USD_TO_KES = 129;
+
+
+// How many items are shown per page on the Items page.
+export const PAGE_SIZE = 8;
