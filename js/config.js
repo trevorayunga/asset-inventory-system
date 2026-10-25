@@ -2,7 +2,7 @@
 // (for example https://your-api.onrender.com) before deploying the frontend.
 export const API_BASE_URL = 'http://localhost:3000';
 
-// Public catalogue API used for importing products (Step 11).
+// Public catalogue API used for importing products .
 export const CATALOGUE_BASE_URL = 'https://dummyjson.com';
 
 // DummyJSON prices are in US dollars. Prices in AssetTrack are in Kenya Shillings (KES).

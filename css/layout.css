@@ -1,4 +1,4 @@
-/* Page shell: fixed sidebar + content column. Desktop layout; breakpoints come in Step 13. */
+/* Page shell: fixed sidebar + content column. Desktop layout; breakpoints . */
 .app { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
 
 .sidebar {

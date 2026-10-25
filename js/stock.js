@@ -83,7 +83,7 @@ export function matchesStatus(item, filter) {
 }
 
 
-/* ---------- Summaries and wording for the dashboard and detail pages (Step 10) ---------- */
+/* ---------- Summaries and wording for the dashboard and detail pages ---------- */
 
 /** History wording: "Assigned", "Restocked"... */
 export const ACTION_LABELS = {
