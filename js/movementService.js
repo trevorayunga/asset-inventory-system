@@ -1,7 +1,16 @@
-// Movement API calls: record a stock or assignment change (PATCH the item, POST the movement).
-import { post } from './api.js';
+// Movement API calls: history (GET) and recording a stock or assignment change (PATCH + POST).
+import { get, post } from './api.js';
 import { patchItem } from './itemService.js';
 import { applyMovement } from './stock.js';
+
+/** Newest first, each with its item attached. Optionally only one item's history, or the latest few. */
+export const getMovements = ({ itemId, limit } = {}) => get('/movements', {
+  itemId,
+  _limit: limit,
+  _sort: 'date',
+  _order: 'desc',
+  _expand: 'item',
+});
 
 export const createMovement = (movement) => post('/movements', movement);
 

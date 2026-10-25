@@ -48,3 +48,18 @@ export function paginate(list, page = 1, pageSize = PAGE_SIZE) {
     to: start + items.length,
   };
 }
+
+/** Movement history filter. `from` and `to` are YYYY-MM-DD dates and include both ends. */
+export function filterMovements(movements, {
+  search = '', action = '', from = '', to = '',
+} = {}) {
+  const term = lower(search).trim();
+  return movements.filter((movement) => {
+    if (action && movement.action !== action) return false;
+    const day = String(movement.date ?? '').slice(0, 10);
+    if (from && day < from) return false;
+    if (to && day > to) return false;
+    if (!term) return true;
+    return `${lower(movement.item?.name)} ${lower(movement.person)} ${lower(movement.note)}`.includes(term);
+  });
+}
