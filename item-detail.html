@@ -36,65 +36,64 @@
     <div class="content">
       <header class="topbar">
         <h1>Item detail</h1>
-        <button type="button" class="btn btn-primary">Record movement</button>
+        <button type="button" class="btn btn-primary" id="record-movement">Record movement</button>
       </header>
       <main id="main">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="items.html">← Items</a> <span aria-hidden="true">/</span> <span>Dell Latitude 5420</span>
-        </nav>
+        <div id="detail-state" aria-live="polite"></div>
+        <div id="detail-content" class="stack" hidden>
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="items.html">← Items</a> <span aria-hidden="true">/</span> <span id="crumb-name"></span>
+          </nav>
 
-        <section class="card card-pad stack" aria-labelledby="item-title">
-          <div class="section-head">
-            <div>
-              <h2 id="item-title" class="title-lg">Dell Latitude 5420</h2>
-              <p class="muted">Asset · Laptop</p>
+          <section class="card card-pad stack" aria-labelledby="item-title">
+            <div class="section-head">
+              <div>
+                <h2 id="item-title" class="title-lg"></h2>
+                <p class="muted" id="item-kind"></p>
+              </div>
+              <div class="badge-row" id="item-badges"></div>
             </div>
-            <div class="badge-row">
-              <span class="badge badge-neutral">2 assigned</span>
-              <span class="badge badge-success">4 available</span>
+            <dl class="facts">
+              <div><dt>SKU</dt><dd id="d-sku"></dd></div>
+              <div><dt>Quantity</dt><dd id="d-quantity"></dd></div>
+              <div><dt>Unit cost</dt><dd id="d-cost"></dd></div>
+              <div><dt>Assigned to</dt><dd id="d-assigned"></dd></div>
+            </dl>
+            <div class="section-head">
+              <div class="btn-row">
+                <button type="button" class="btn btn-secondary" id="edit-item">Edit</button>
+                <button type="button" class="btn btn-primary" id="assign-return">Assign / Return</button>
+                <button type="button" class="btn btn-primary" id="restock-issue">Restock / Issue</button>
+                <button type="button" class="btn btn-secondary" id="delete-item">Delete</button>
+              </div>
+              <p class="muted" id="d-value"></p>
             </div>
-          </div>
-          <dl class="facts">
-            <div><dt>SKU</dt><dd>LAP-001</dd></div>
-            <div><dt>Quantity</dt><dd>6 total · 4 available</dd></div>
-            <div><dt>Unit cost</dt><dd>KES 95,000</dd></div>
-            <div><dt>Assigned to</dt><dd>2 units assigned · latest: Maya Patel</dd></div>
-          </dl>
-          <div class="section-head">
-            <div class="btn-row">
-              <button type="button" class="btn btn-secondary">Edit</button>
-              <button type="button" class="btn btn-primary">Assign / Return</button>
-              <button type="button" class="btn btn-secondary">Restock / Issue</button>
-              <button type="button" class="btn btn-secondary">Delete</button>
-            </div>
-            <p class="muted">Total value KES 570,000</p>
-          </div>
-        </section>
+          </section>
 
-        <section class="card" aria-labelledby="history-heading">
-          <div class="card-pad"><h2 id="history-heading">Movement History</h2></div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th scope="col">Date</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Note</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>14 Oct 2026</td><td>Assigned</td><td>2</td><td class="muted">Maya Patel</td></tr>
-                <tr><td>10 Oct 2026</td><td>Received</td><td>+6</td><td class="muted">PO-1101 · Initial stock</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <footer class="table-footer">
-            <p class="muted">2 movements · Complete history</p>
-            <p class="muted">Assignments change availability, not total quantity.</p>
-          </footer>
-        </section>
+          <section class="card" aria-labelledby="history-heading">
+            <div class="card-pad"><h2 id="history-heading">Movement History</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">Date</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Note</th></tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+              </table>
+            </div>
+            <footer class="table-footer">
+              <p class="muted" id="history-count"></p>
+              <p class="muted" id="history-note"></p>
+            </footer>
+          </section>
+        </div>
       </main>
       <footer class="page-footer">
         <span>Acme Operations</span>
-        <time datetime="2026-10-21">21 Oct 2026</time>
+        <time id="today"></time>
       </footer>
     </div>
   </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/pages/itemDetail.js"></script>
 </body>
 </html>
