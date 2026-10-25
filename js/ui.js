@@ -1,5 +1,7 @@
 // Rendering helpers. The render functions return strings, so they are easy to test.
-import { GROUP_LABELS, displayStatus, isStockedGroup, itemGroup } from './stock.js';
+import {
+  ACTION_LABELS, GROUP_LABELS, displayStatus, isStockedGroup, itemGroup,
+} from './stock.js';
 
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
@@ -108,4 +110,72 @@ export function renderPager(container, { page, totalPages }, onPage) {
     const button = event.target.closest('[data-page]');
     if (button && !button.disabled) onPage(Number(button.dataset.page));
   };
+}
+
+
+/* ---------- Money, dates and history rows ---------- */
+
+const KES = new Intl.NumberFormat('en-KE', {
+  style: 'currency',
+  currency: 'KES',
+  currencyDisplay: 'code', // shows "KES 95,000" instead of "Ksh 95,000"
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
+});
+
+export const formatCurrency = (value) => KES.format(Number(value) || 0);
+
+export function formatDate(iso, { short = false } = {}) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '—';
+  const options = short
+    ? { day: 'numeric', month: 'short' }
+    : { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+  return date.toLocaleString('en-GB', options);
+}
+
+/** Stock going out shows a minus sign, stock coming in a plus sign. */
+export function formatQuantity(action, quantity) {
+  if (action === 'issue') return `−${quantity}`;
+  if (action === 'restock' || action === 'receive') return `+${quantity}`;
+  return String(quantity);
+}
+
+/** One row of a movement table. `showItem` adds the item-name column. */
+export function renderMovementRow(movement, { showItem = true, shortDate = false } = {}) {
+  const note = [movement.person, movement.note].filter(Boolean).join(' · ');
+  const itemCell = showItem
+    ? `<td>${movement.item ? `<a href="item-detail.html?id=${escapeHtml(movement.itemId)}">${escapeHtml(movement.item.name)}</a>` : '—'}</td>`
+    : '';
+  return `<tr>
+  <td>${escapeHtml(formatDate(movement.date, { short: shortDate }))}</td>
+  ${itemCell}
+  <td>${escapeHtml(ACTION_LABELS[movement.action] ?? movement.action)}</td>
+  <td>${escapeHtml(formatQuantity(movement.action, movement.quantity))}</td>
+  <td class="muted">${escapeHtml(note) || '—'}</td>
+</tr>`;
+}
+
+/** A dashboard card for an item that is running low. */
+export function renderLowStockAlert(item) {
+  const group = GROUP_LABELS[itemGroup(item)] ?? '';
+  return `<article class="alert-item">
+  <div class="alert-item-head">
+    <h3>${escapeHtml(item.name)}</h3>
+    <span class="warn-icon" aria-hidden="true">⚠</span>
+  </div>
+  ${badge(`Low stock · ${item.quantity} left`, 'warning')}
+  <p class="muted">Reorder level: ${escapeHtml(item.reorderLevel)} units</p>
+  <p class="muted">${escapeHtml(item.sku)} · ${escapeHtml(group)}</p>
+  <button type="button" class="btn btn-secondary" data-action="restock" data-id="${escapeHtml(item.id)}">Restock item</button>
+</article>`;
+}
+
+/** Writes today's date into the footer <time id="today">. */
+export function initPage() {
+  const today = document.getElementById('today');
+  if (!today) return;
+  const now = new Date();
+  today.dateTime = now.toISOString();
+  today.textContent = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
