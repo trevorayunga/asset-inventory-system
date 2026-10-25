@@ -40,7 +40,7 @@
         <button type="button" class="btn btn-primary" id="add-item">+ Add Item</button>
       </header>
       <main id="main">
-        <form class="filters" role="search" aria-label="Search and filter items">
+                <form class="filters" id="filters" role="search" aria-label="Search and filter items">
           <div class="field">
             <label for="filter-search">Search items</label>
             <input id="filter-search" type="search" placeholder="Name or SKU" autocomplete="off">
@@ -49,9 +49,6 @@
             <label for="filter-category">Category</label>
             <select id="filter-category">
               <option value="">All categories</option>
-              <option>Laptop</option><option>Projector</option><option>Monitor</option>
-              <option>Mouse</option><option>Keyboard</option><option>RAM Module</option>
-              <option>Storage Drive</option><option>Cable</option><option>Toner</option>
             </select>
           </div>
           <div class="field">
@@ -100,7 +97,8 @@
               </table>
             </div>
             <footer class="table-footer">
-              <p class="muted" id="items-count"></p>
+            <p class="muted" id="items-count" aria-live="polite"></p>
+              <nav class="pager" id="items-pager" aria-label="Pagination"></nav>
             </footer>
           </div>
         </section>
