@@ -2,7 +2,7 @@
 
 AssetTrack is a front-end web app for tracking an organisation's equipment and stock. It manages **items**, **categories** and **stock movements** (assign, return, issue, restock, receive) against a REST API built with [JSON Server](https://github.com/typicode/json-server). It is written in vanilla JavaScript (ES modules), semantic HTML and plain CSS, with no front-end framework.
 
-> **Live demo:** `<add your deployed URL>` | **API:** `<add your deployed JSON Server URL>`
+> **Live demo:** `https://trevorayunga.github.io/asset-inventory-system/` 
 
 ---
 
@@ -128,7 +128,7 @@ asset-inventory-system/
 ## Getting started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) 18 or later
+- [Node.js](https://nodejs.org/) 22 or later
 - Git
 - A static file server for the front end, such as the VS Code **Live Server** extension (the project uses port `5500`)
 
