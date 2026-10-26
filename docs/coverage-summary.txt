@@ -1,0 +1,67 @@
+
+> asset-inventory-system@1.0.0 coverage
+> node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --passWithNoTests
+
+(node:17632) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19420) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/ui.test.js
+(node:18928) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1596) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1324) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17956) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11056) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/detail.page.test.js
+PASS tests/edit-delete.page.test.js
+PASS tests/catalogue.page.test.js
+PASS tests/add-item.page.test.js
+PASS tests/movement-dialog.page.test.js
+PASS tests/dialogs.test.js
+PASS tests/summary.test.js
+PASS tests/stock.test.js
+PASS tests/filters.test.js
+PASS tests/dashboard.page.test.js
+PASS tests/movements.page.test.js
+PASS tests/item-service.test.js
+PASS tests/catalogue-service.test.js
+PASS tests/api.test.js
+PASS tests/validators.edit.test.js
+PASS tests/items-filters.page.test.js
+PASS tests/validators.test.js
+PASS tests/movement-service.test.js
+----------------------|---------|----------|---------|---------|----------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
+----------------------|---------|----------|---------|---------|----------------------
+All files             |    98.1 |    91.09 |     100 |   98.96 |                      
+ js                   |   99.41 |    92.98 |     100 |     100 |                      
+  api.js              |     100 |      100 |     100 |     100 |                      
+  catalogueService.js |     100 |     91.3 |     100 |     100 | 36,45                
+  config.js           |     100 |      100 |     100 |     100 |                      
+  dialogs.js          |     100 |      100 |     100 |     100 |                      
+  filters.js          |     100 |     90.9 |     100 |     100 | 5,27-31,53,59        
+  itemForm.js         |   98.55 |    90.24 |     100 |     100 | 26-28,69,97          
+  itemService.js      |     100 |      100 |     100 |     100 |                      
+  movementDialog.js   |    98.3 |       90 |     100 |     100 | 24,87                
+  movementService.js  |     100 |      100 |     100 |     100 |                      
+  stock.js            |   98.57 |    85.71 |     100 |     100 | 21,32,62,100-117,130 
+  ui.js               |     100 |    94.44 |     100 |     100 | 83,111,153,161       
+  validators.js       |     100 |    97.59 |     100 |     100 | 22,26                
+ js/pages             |   95.74 |    82.14 |     100 |   97.21 |                      
+  catalogue.js        |   95.65 |       75 |     100 |     100 | 35-80                
+  dashboard.js        |    97.5 |    83.33 |     100 |     100 | 59-61                
+  itemDetail.js       |   98.33 |    80.76 |     100 |   98.14 | 101                  
+  items.js            |   91.11 |    82.14 |     100 |    92.3 | 74,84,90-91,106-107  
+  movements.js        |     100 |      100 |     100 |     100 |                      
+----------------------|---------|----------|---------|---------|----------------------
+
+Test Suites: 19 passed, 19 total
+Tests:       173 passed, 173 total
+Snapshots:   0 total
+Time:        7.391 s, estimated 9 s
+Ran all test suites.
