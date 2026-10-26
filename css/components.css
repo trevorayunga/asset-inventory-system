@@ -80,7 +80,7 @@ input, select {
 
 /* Catalogue cards */
 .product-card { display: grid; gap: var(--space-1); justify-items: start; align-content: start; padding: var(--space-2); background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
-.product-image { display: grid; place-items: center; width: 100%; height: 120px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); }
+.product-image { display: grid; place-items: center; width: 50%; height: 180px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); }
 .product-meta { display: flex; justify-content: space-between; width: 100%; font-weight: 500; }
 
 /* Loading, error and empty states */
@@ -121,3 +121,7 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--ac
 .toast-region { position: fixed; right: var(--space-3); bottom: var(--space-3); z-index: 200; display: grid; gap: var(--space-1); }
 .toast { padding: 12px var(--space-2); background: var(--white); border: 1px solid var(--support); border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
 .toast-error { border-color: var(--accent); color: var(--accent-text); }
+
+
+.product-image { overflow: hidden; }
+.product-image img { width: 100%; height: 100%; object-fit: contain; }

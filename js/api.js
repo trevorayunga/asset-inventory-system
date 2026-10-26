@@ -1,6 +1,9 @@
 // Generic fetch wrapper: one place for URL building, JSON handling and errors.
 import { API_BASE_URL } from './config.js';
 
+/** Calls any full URL (used for the public catalogue API). */
+export const getExternal = (fullUrl, params) => request(`${fullUrl}${buildQuery(params)}`);
+
 export class ApiError extends Error {
   constructor(message, status = 0) {
     super(message);

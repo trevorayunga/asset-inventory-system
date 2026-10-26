@@ -134,6 +134,17 @@
       "unitCost": 8500,
       "reorderLevel": 4,
       "status": "active"
+    },
+    {
+      "name": "Apple MacBook Pro 14 Inch Space Grey",
+      "sku": "LAP-APP-APP-078",
+      "categoryId": 1,
+      "quantity": 1,
+      "assignedQuantity": 1,
+      "unitCost": 257999,
+      "reorderLevel": 1,
+      "status": "active",
+      "id": 9
     }
   ],
   "movements": [
@@ -289,6 +300,24 @@
       "note": "",
       "date": "2026-10-25T16:52:07.497Z",
       "id": 17
+    },
+    {
+      "itemId": 9,
+      "action": "receive",
+      "quantity": 1,
+      "person": "",
+      "note": "Initial stock",
+      "date": "2026-10-26T05:45:33.333Z",
+      "id": 18
+    },
+    {
+      "itemId": 9,
+      "action": "assign",
+      "quantity": 1,
+      "person": "okoth",
+      "note": "",
+      "date": "2026-10-26T06:04:36.308Z",
+      "id": 19
     }
   ]
 }

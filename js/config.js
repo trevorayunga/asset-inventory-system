@@ -12,3 +12,7 @@ export const USD_TO_KES = 129;
 
 // How many items are shown per page on the Items page.
 export const PAGE_SIZE = 8;
+
+
+// Which DummyJSON category the catalogue page shows before the user searches.
+export const DEFAULT_CATALOGUE_CATEGORY = 'laptops';

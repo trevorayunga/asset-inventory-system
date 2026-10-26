@@ -38,7 +38,7 @@
         <h1>Catalogue Import</h1>
       </header>
       <main id="main">
-        <form class="search-bar" role="search" aria-label="Search the online catalogue">
+        <form class="search-bar" id="search-form" role="search" aria-label="Search the online catalogue">
           <div class="field grow">
             <label for="catalogue-search" class="visually-hidden">Search online catalogue</label>
             <input id="catalogue-search" type="search" placeholder="Search online catalogue by product name" autocomplete="off">
@@ -50,35 +50,19 @@
         <section aria-labelledby="catalogue-title" class="stack">
           <div class="section-head">
             <h2 id="catalogue-title">Online product catalogue</h2>
-            <p class="muted">Sample products · prices shown in KES</p>
+            <p class="muted" id="catalogue-count" aria-live="polite"></p>
           </div>
-          <div class="product-grid">
-            <article class="product-card">
-              <div class="product-image"><span class="muted">Product image</span></div>
-              <h3>Lenovo Yoga 710</h3>
-              <p class="product-meta"><span>KES 103,199</span><span class="muted">In stock: 14</span></p>
-              <button type="button" class="btn btn-primary">Import</button>
-            </article>
-            <article class="product-card">
-              <div class="product-image"><span class="muted">Product image</span></div>
-              <h3>Asus Zenbook Pro</h3>
-              <p class="product-meta"><span>KES 141,771</span><span class="muted">In stock: 6</span></p>
-              <button type="button" class="btn btn-primary">Import</button>
-            </article>
-            <article class="product-card">
-              <div class="product-image"><span class="muted">Product image</span></div>
-              <h3>Dell XPS 13</h3>
-              <p class="product-meta"><span>KES 167,700</span><span class="muted">In stock: 9</span></p>
-              <button type="button" class="btn btn-primary">Import</button>
-            </article>
-          </div>
+          <div id="catalogue-state" aria-live="polite"></div>
+          <div class="product-grid" id="product-grid" hidden></div>
         </section>
       </main>
       <footer class="page-footer">
         <span>Acme Operations</span>
-        <time datetime="2026-10-21">21 Oct 2026</time>
+        <time id="today"></time>
       </footer>
     </div>
   </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/pages/catalogue.js"></script>
 </body>
 </html>

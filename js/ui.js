@@ -179,3 +179,18 @@ export function initPage() {
   today.dateTime = now.toISOString();
   today.textContent = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
+
+
+/* ---------- Catalogue cards---------- */
+
+export function renderProductCard(product, index) {
+  const image = product.imageUrl
+    ? `<img src="${escapeHtml(product.imageUrl)}" alt="${escapeHtml(product.name)}" loading="lazy" width="200" height="120">`
+    : '<span class="muted">No image</span>';
+  return `<article class="product-card">
+  <div class="product-image">${image}</div>
+  <h3>${escapeHtml(product.name)}</h3>
+  <p class="product-meta"><span>${escapeHtml(formatCurrency(product.unitCost))}</span><span class="muted">In stock: ${escapeHtml(product.suppliedStock)}</span></p>
+  <button type="button" class="btn btn-primary" data-action="import" data-index="${index}" aria-label="Import ${escapeHtml(product.name)}">Import</button>
+</article>`;
+}

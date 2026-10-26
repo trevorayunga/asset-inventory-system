@@ -66,7 +66,7 @@ function normalise(values) {
  * mode 'edit': pass the existing `item`; the form is pre-filled and saved with PUT.
  */
 export function openItemDialog({
-  mode = 'add', item = null, categories, existingItems = [], onSaved,
+  mode = 'add', item = null, defaults = null, categories, existingItems = [], onSaved,
 }) {
   const isEdit = mode === 'edit';
   const form = document.createElement('form');
@@ -75,7 +75,12 @@ export function openItemDialog({
 
   if (isEdit) {
     ['name', 'sku', 'categoryId', 'status', 'quantity', 'reorderLevel', 'unitCost'].forEach((name) => {
-      form.querySelector(`[name="${name}"]`).value = item[name];
+           form.querySelector(`[name="${name}"]`).value = item[name];
+    });
+  } else if (defaults) {
+    Object.entries(defaults).forEach(([name, value]) => {
+      const control = form.querySelector(`[name="${name}"]`);
+      if (control && value !== '' && value !== null && value !== undefined) control.value = value;
     });
   }
 
