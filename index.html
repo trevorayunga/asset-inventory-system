@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | AssetTrack</title>
+  <meta name="description" content="Overview of assets, stock levels and recent movements.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>AssetTrack</strong>
+        <span>Assets &amp; inventory</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html" aria-current="page">Dashboard</a></li>
+          <li><a href="items.html">Items</a></li>
+          <li><a href="catalogue.html">Catalogue Import</a></li>
+          <li><a href="movements.html">Movements</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Acme Operations</span>
+        <span>Alex Morgan · Admin</span>
+      </div>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1>Dashboard</h1>
+        <a class="btn btn-primary" href="items.html?add=1">+ Add Item</a>
+      </header>
+      <main id="main">
+        <div id="dashboard-state" aria-live="polite"></div>
+        <div id="dashboard-content" class="stack" hidden>
+          <div class="section-head">
+            <h2>Inventory overview</h2>
+            <p class="muted" id="updated-at"></p>
+          </div>
+
+          <section class="stat-grid" aria-label="Key figures">
+            <article class="card stat-card">
+              <h3>Total Items</h3>
+              <p class="stat-value" id="stat-items">0</p>
+              <p class="muted" id="stat-items-note"></p>
+            </article>
+            <article class="card stat-card">
+              <h3>Total Stock Value</h3>
+              <p class="stat-value" id="stat-value">KES 0</p>
+              <p class="muted">At unit cost · includes assigned</p>
+            </article>
+            <article class="card stat-card" id="stat-low-card">
+              <h3>Low-Stock Items</h3>
+              <p class="stat-value" id="stat-low">0</p>
+              <p class="muted">Components and consumables below reorder level</p>
+            </article>
+            <article class="card stat-card">
+              <h3>Assigned Assets</h3>
+              <p class="stat-value" id="stat-assigned">0</p>
+              <p class="muted" id="stat-assigned-note"></p>
+            </article>
+          </section>
+
+          <div class="two-col">
+            <section class="card" aria-labelledby="low-heading">
+              <div class="card-pad"><h2 id="low-heading">Low-Stock Alerts</h2></div>
+              <div class="card-pad alert-list" id="low-stock-list"></div>
+            </section>
+
+            <section class="card" aria-labelledby="recent-heading">
+              <div class="card-pad"><h2 id="recent-heading">Recent Movements</h2></div>
+              <div class="table-wrap">
+                <table>
+                  <caption class="visually-hidden">Most recent stock and assignment movements</caption>
+                  <thead>
+                    <tr><th scope="col">Date</th><th scope="col">Item</th><th scope="col">Action</th><th scope="col">Qty</th><th scope="col">Note</th></tr>
+                  </thead>
+                  <tbody id="recent-body"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <section class="card summary-band" aria-label="Summary">
+            <div><p class="muted">Assets and accessories</p><p class="band-value" id="band-assignable"></p></div>
+            <div><p class="muted">Available to assign</p><p class="band-value is-support" id="band-available"></p></div>
+            <div><p class="muted">Components and consumables</p><p class="band-value" id="band-stocked"></p></div>
+            <div><p class="muted">Next action</p><p class="band-value" id="band-next"></p></div>
+          </section>
+        </div>
+      </main>
+      <footer class="page-footer">
+        <span>Acme Operations</span>
+        <time id="today"></time>
+      </footer>
+    </div>
+  </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/pages/dashboard.js"></script>
+</body>
+</html>

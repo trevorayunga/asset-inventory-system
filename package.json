@@ -1,0 +1,32 @@
+{
+  "name": "asset-inventory-system",
+  "version": "1.0.0",
+  "description": "AssetTrack: a multi-page Asset & Inventory Management System (vanilla JS + JSON Server)",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "json-server --watch db.json --port 3000",
+    "serve": "npx http-server . -p 5500 -c-1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
+    "coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --passWithNoTests"
+  },
+  "dependencies": {
+    "json-server": "0.17.4"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "collectCoverageFrom": ["js/**/*.js"],
+    "coverageThreshold": {
+      "global": { "statements": 50, "branches": 50, "functions": 50, "lines": 50 }
+    }
+  },
+  "license": "MIT"
+}

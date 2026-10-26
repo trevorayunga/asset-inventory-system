@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Items | AssetTrack</title>
+  <meta name="description" content="Search, filter and manage assets, accessories, components and consumables.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+ 
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>AssetTrack</strong>
+        <span>Assets &amp; inventory</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="items.html" aria-current="page">Items</a></li>
+          <li><a href="catalogue.html">Catalogue Import</a></li>
+          <li><a href="movements.html">Movements</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Acme Operations</span>
+        <span>Alex Morgan · Admin</span>
+      </div>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1>Items</h1>
+        <button type="button" class="btn btn-primary" id="add-item">+ Add Item</button>
+      </header>
+      <main id="main">
+                <form class="filters" id="filters" role="search" aria-label="Search and filter items">
+          <div class="field">
+            <label for="filter-search">Search items</label>
+            <input id="filter-search" type="search" placeholder="Name or SKU" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="filter-category">Category</label>
+            <select id="filter-category">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-group">Group</label>
+            <select id="filter-group">
+              <option value="">All groups</option>
+              <option value="asset">Asset</option>
+              <option value="accessory">Accessory</option>
+              <option value="component">Component</option>
+              <option value="consumable">Consumable</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-status">Status</label>
+            <select id="filter-status">
+              <option value="">All statuses</option>
+              <option value="available">Available</option>
+              <option value="assigned">Assigned</option>
+              <option value="low">Low stock</option>
+              <option value="maintenance">In maintenance</option>
+              <option value="retired">Retired</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-sort">Sort by</label>
+            <select id="filter-sort">
+              <option value="name-asc">Name A–Z</option>
+              <option value="name-desc">Name Z–A</option>
+              <option value="quantity-asc">Quantity low–high</option>
+              <option value="quantity-desc">Quantity high–low</option>
+              <option value="cost-desc">Unit cost high–low</option>
+            </select>
+          </div>
+        </form>
+
+               <section aria-labelledby="items-heading">
+          <h2 id="items-heading" class="visually-hidden">Item list</h2>
+          <div id="items-state" aria-live="polite"></div>
+          <div class="card" id="items-table-card" hidden>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">Name</th><th scope="col">SKU</th><th scope="col">Category</th><th scope="col">Group</th><th scope="col">Quantity</th><th scope="col">Status</th><th scope="col">Actions</th></tr>
+                </thead>
+                <tbody id="items-body"></tbody>
+              </table>
+            </div>
+            <footer class="table-footer">
+            <p class="muted" id="items-count" aria-live="polite"></p>
+              <nav class="pager" id="items-pager" aria-label="Pagination"></nav>
+            </footer>
+          </div>
+        </section>
+      </main>
+      <footer class="page-footer">
+        <span>Acme Operations</span>
+        <time id="today"></time>
+      </footer>
+    </div>
+  </div>
+   <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/pages/items.js"></script>
+</body>
+</html>

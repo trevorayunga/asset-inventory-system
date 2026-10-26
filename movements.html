@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movements | AssetTrack</title>
+  <meta name="description" content="Full history of assignments, returns, issues and restocks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>AssetTrack</strong>
+        <span>Assets &amp; inventory</span>
+      </div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="items.html">Items</a></li>
+          <li><a href="catalogue.html">Catalogue Import</a></li>
+          <li><a href="movements.html" aria-current="page">Movements</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Acme Operations</span>
+        <span>Alex Morgan · Admin</span>
+      </div>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1>Movements</h1>
+      </header>
+      <main id="main">
+        <form class="filters filters-movements" id="filters" role="search" aria-label="Filter movements">
+          <div class="field">
+            <label for="filter-search">Search movements</label>
+            <input id="filter-search" type="search" placeholder="Item, person or note" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="filter-action">Action</label>
+            <select id="filter-action">
+              <option value="">All actions</option>
+              <option value="assign">Assigned</option>
+              <option value="return">Returned</option>
+              <option value="issue">Issued</option>
+              <option value="restock">Restocked</option>
+              <option value="receive">Received</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-from">From</label>
+            <input id="filter-from" type="date">
+          </div>
+          <div class="field">
+            <label for="filter-to">To</label>
+            <input id="filter-to" type="date">
+          </div>
+          <div class="field field-end">
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </div>
+        </form>
+
+        <section aria-labelledby="movements-heading">
+          <h2 id="movements-heading" class="visually-hidden">Movement list</h2>
+          <div id="movements-state" aria-live="polite"></div>
+          <div class="card" id="movements-card" hidden>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">Date</th><th scope="col">Item</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Person / Note</th></tr>
+                </thead>
+                <tbody id="movements-body"></tbody>
+              </table>
+            </div>
+            <footer class="table-footer">
+              <p class="muted" id="movements-count" aria-live="polite"></p>
+              <nav class="pager" id="movements-pager" aria-label="Pagination"></nav>
+            </footer>
+          </div>
+        </section>
+      </main>
+      <footer class="page-footer">
+        <span>Acme Operations</span>
+        <time id="today"></time>
+      </footer>
+    </div>
+  </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/pages/movements.js"></script>
+</body>
+</html>
