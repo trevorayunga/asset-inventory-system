@@ -37,9 +37,9 @@
     <div class="content">
       <header class="topbar">
         <h1>Items</h1>
-        <button type="button" class="btn btn-primary" id="add-item">+ Add Item</button>
+        <button type="button" class="btn btn-primary" id="add-item" aria-haspopup="dialog">+ Add Item</button>
       </header>
-      <main id="main">
+      <main id="main" tabindex="-1">
                 <form class="filters" id="filters" role="search" aria-label="Search and filter items">
           <div class="field">
             <label for="filter-search">Search items</label>
@@ -88,8 +88,9 @@
           <h2 id="items-heading" class="visually-hidden">Item list</h2>
           <div id="items-state" aria-live="polite"></div>
           <div class="card" id="items-table-card" hidden>
-            <div class="table-wrap">
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Items table">
               <table>
+                <caption class="visually-hidden">Inventory items</caption>
                 <thead>
                   <tr><th scope="col">Name</th><th scope="col">SKU</th><th scope="col">Category</th><th scope="col">Group</th><th scope="col">Quantity</th><th scope="col">Status</th><th scope="col">Actions</th></tr>
                 </thead>

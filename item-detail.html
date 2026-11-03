@@ -38,7 +38,7 @@
         <h1>Item detail</h1>
         <button type="button" class="btn btn-primary" id="record-movement">Record movement</button>
       </header>
-      <main id="main">
+      <main id="main" tabindex="-1">
         <div id="detail-state" aria-live="polite"></div>
         <div id="detail-content" class="stack" hidden>
           <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -72,8 +72,9 @@
 
           <section class="card" aria-labelledby="history-heading">
             <div class="card-pad"><h2 id="history-heading">Movement History</h2></div>
-            <div class="table-wrap">
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Movement history table">
               <table>
+                <caption class="visually-hidden">Movement history for this item</caption>
                 <thead>
                   <tr><th scope="col">Date</th><th scope="col">Action</th><th scope="col">Quantity</th><th scope="col">Note</th></tr>
                 </thead>
