@@ -1,4 +1,4 @@
-// Items page: load (Step 5), add (6), edit and delete (7), stock movements (8), filters and pages (9).
+
 import { confirmDialog } from '../dialogs.js';
 import { filterItems, paginate, sortItems } from '../filters.js';
 import { openItemDialog } from '../itemForm.js';

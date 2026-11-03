@@ -1,4 +1,4 @@
-// Add / edit item dialog. Step 6 added "add"; Step 7 adds "edit" using the same form.
+
 import { openModal, readFormValues, setFormError, setSaving, showFieldErrors } from './dialogs.js';
 import { createItem, toItemPayload, updateItem } from './itemService.js';
 import { createMovement } from './movementService.js';

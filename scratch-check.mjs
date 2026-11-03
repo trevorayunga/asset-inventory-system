@@ -1,4 +1,4 @@
-// Temporary check for Step 4. Run it while the API is running. Delete it afterwards.
+// Temporary check Run it while the API is running. Delete it afterwards.
 import { ApiError, buildQuery, get, post, request } from './js/api.js';
 import {
   createItem, deleteItem, getCategories, getItem, getItems, patchItem, toItemPayload, updateItem,
