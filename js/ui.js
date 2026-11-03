@@ -15,6 +15,7 @@ export function renderItemRow(item) {
   const group = itemGroup(item);
   const primaryAction = isStockedGroup(group) ? 'Restock' : 'Assign';
   const id = escapeHtml(item.id);
+  const name = escapeHtml(item.name);
   return `<tr>
   <td><a href="item-detail.html?id=${id}">${escapeHtml(item.name)}</a></td>
   <td>${escapeHtml(item.sku)}</td>
@@ -23,9 +24,9 @@ export function renderItemRow(item) {
   <td>${escapeHtml(item.quantity)}</td>
   <td>${badge(status.label, status.variant)}</td>
   <td><div class="row-actions">
-    <button type="button" class="link-btn" data-action="edit" data-id="${id}">Edit</button>
-    <button type="button" class="link-btn" data-action="movement" data-id="${id}">${primaryAction}</button>
-    <button type="button" class="link-btn" data-action="delete" data-id="${id}">Delete</button>
+    <button type="button" class="link-btn" data-action="edit" data-id="${id}" aria-label="Edit ${name}">Edit</button>
+    <button type="button" class="link-btn" data-action="movement" data-id="${id}" aria-label="${primaryAction} ${name}">${primaryAction}</button>
+    <button type="button" class="link-btn" data-action="delete" data-id="${id}" aria-label="Delete ${name}">Delete</button>
   </div></td>
 </tr>`;
 }
@@ -167,7 +168,7 @@ export function renderLowStockAlert(item) {
   ${badge(`Low stock · ${item.quantity} left`, 'warning')}
   <p class="muted">Reorder level: ${escapeHtml(item.reorderLevel)} units</p>
   <p class="muted">${escapeHtml(item.sku)} · ${escapeHtml(group)}</p>
-  <button type="button" class="btn btn-secondary" data-action="restock" data-id="${escapeHtml(item.id)}">Restock item</button>
+  <button type="button" class="btn btn-secondary" data-action="restock" data-id="${escapeHtml(item.id)}" aria-label="Restock item ${escapeHtml(item.name)}">Restock item</button>
 </article>`;
 }
 

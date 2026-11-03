@@ -6,13 +6,13 @@ export function openModal({ title, subtitle = '', content, onClose }) {
   dialog.className = 'modal';
   dialog.setAttribute('aria-labelledby', 'modal-title');
   dialog.innerHTML = `<div class="modal-panel">
-    <header class="modal-header">
+    <div class="modal-header">
       <div>
         <h2 id="modal-title">${escapeHtml(title)}</h2>
         ${subtitle ? `<p class="muted">${escapeHtml(subtitle)}</p>` : ''}
       </div>
       <button type="button" class="icon-btn" data-close aria-label="Close dialog">×</button>
-    </header>
+    </div>
     <div class="modal-body"></div>
   </div>`;
   dialog.querySelector('.modal-body').append(content);
