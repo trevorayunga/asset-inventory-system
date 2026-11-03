@@ -51,7 +51,7 @@ td a:hover { text-decoration: underline; }
   padding: var(--space-2); border-top: 1px solid var(--border);
 }
 
-/* Badges: white on dark fills, dark text on amber (WCAG AA contrast) */
+/* Badges */
 .badge { display: inline-block; padding: 2px 10px; border-radius: var(--radius); font-size: 0.875rem; font-weight: 500; white-space: nowrap; }
 .badge-success { background: var(--support); color: var(--white); }
 .badge-warning { background: var(--accent); color: #2B2100; }
@@ -125,3 +125,32 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--ac
 
 .product-image { overflow: hidden; }
 .product-image img { width: 100%; height: 100%; object-fit: contain; }
+
+
+
+
+
+input, select, .input-prefix { border-color: var(--border-strong); }
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--accent-text); }
+.input-prefix:has(input[aria-invalid="true"]) { border-color: var(--accent-text); }
+.input-prefix input { border: 0; }
+
+/* Wide tables scroll sideways inside their card instead of squashing or breaking the page */
+.table-wrap table { min-width: 640px; }
+.table-wrap:focus-visible { outline-offset: -3px; }
+.stat-value { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem); overflow-wrap: anywhere; }
+
+/* Phones and touch screens: bigger targets (at least 44px) and a roomier dialog */
+@media (pointer: coarse), (max-width: 560px) {
+  .btn, .pager-btn, input, select { min-height: 44px; }
+  .icon-btn { min-width: 44px; min-height: 44px; }
+  .link-btn { padding: 10px 6px; }
+  .row-actions { flex-wrap: wrap; gap: 4px var(--space-1); }
+}
+@media (max-width: 560px) {
+  .form-grid { grid-template-columns: minmax(0, 1fr); }
+  .modal { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); }
+  .modal-header, .modal-body { padding: var(--space-2); }
+  .modal-footer .muted { flex-basis: 100%; }
+  .toast-region { left: var(--space-2); right: var(--space-2); bottom: var(--space-2); }
+}

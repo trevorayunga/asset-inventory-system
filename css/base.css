@@ -1,6 +1,6 @@
 
 :root {
-  /* Colours (max three, plus neutrals) */
+  
   --primary: #1f5b79;
   --accent: #F2A900;
   --accent-text: #8A5F00;
@@ -10,6 +10,7 @@
   --white: #FFFFFF;
   --bg: #F4F6F8;
   --border: #D9DEE3;
+  --border-strong: #7B8794; /* form-field borders: 3.7:1 against white */
   --text: #333333;
   --muted: #5B6773;
 
@@ -60,3 +61,14 @@ button, input, select { font: inherit; color: inherit; }
 
 .muted { color: var(--muted); font-size: 0.875rem; }
 .stack { display: grid; gap: var(--space-3); align-content: start; }
+
+
+main:focus { outline: none; }
+
+
+h1 { font-size: clamp(1.5rem, 1rem + 1.6vw, 2rem); }
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
