@@ -4,7 +4,9 @@
   "description": "AssetTrack: a multi-page Asset & Inventory Management System (vanilla JS + JSON Server)",
   "type": "module",
   "private": true,
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "json-server --watch db.json --port 3000",
@@ -17,15 +19,23 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "axe-core": "^4.14.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
   },
   "jest": {
     "testEnvironment": "node",
     "transform": {},
-    "collectCoverageFrom": ["js/**/*.js"],
+    "collectCoverageFrom": [
+      "js/**/*.js"
+    ],
     "coverageThreshold": {
-      "global": { "statements": 50, "branches": 50, "functions": 50, "lines": 50 }
+      "global": {
+        "statements": 50,
+        "branches": 50,
+        "functions": 50,
+        "lines": 50
+      }
     }
   },
   "license": "MIT"

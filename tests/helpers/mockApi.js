@@ -104,6 +104,7 @@ export function loadPage(file, query = '') {
   const html = fs.readFileSync(new URL(`../../${file}`, import.meta.url), 'utf8');
   const body = html.match(/<body>([\s\S]*)<\/body>/)[1].replace(/<script[\s\S]*?<\/script>/g, '');
   document.body.innerHTML = body;
+  document.title = (html.match(/<title>(.*?)<\/title>/) || [])[1] || '';
   window.history.pushState({}, '', `/${file}${query}`);
 }
 
