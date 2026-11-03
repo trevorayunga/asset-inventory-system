@@ -1,19 +1,18 @@
-/* Design tokens from the Figma wireframes: three colours plus neutrals, Inter, 8px grid. */
+
 :root {
-  /* Colours (max three, plus neutrals) */
+ 
   --primary: #1F4E79;
   --accent: #F2A900;
   --accent-text: #8A5F00;
   --support: #1F7A70;
 
-  /* Neutrals */
+  
   --white: #FFFFFF;
   --bg: #F4F6F8;
   --border: #D9DEE3;
   --text: #333333;
   --muted: #5B6773;
 
-  /* Spacing (8px grid) and shape */
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
